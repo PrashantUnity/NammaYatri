@@ -1,0 +1,38 @@
+﻿@page "/"
+@inject CurrentContextData context
+@inject HttpClient http
+<PageTitle>Index</PageTitle>
+<SearchComponent ParentCaller="FetchAvailableVehicle"></SearchComponent>
+@if (availableVehicles != null)
+{
+	<div class="container">
+		<div class="row">
+			@foreach (var i in availableVehicles)
+			{
+				<VehicleComponent availableVehicle="@i" searchVechile="@search" OrderedVehicle="ReserveVehicle" />
+			}
+		</div>
+	</div>  						
+}
+
+@code {
+	private IEnumerable<AvailableVehicle>? availableVehicles;
+	private SearchVehicle search;
+
+	public async void FetchAvailableVehicle(SearchVehicle searchVehicle)
+	{
+		search = searchVehicle;
+		//availableVehicles = await context.GetAvailableVehiclesAsync(searchVehicle) ;
+		//availableVehicles = await http.GetFromJsonAsync<AvailableVehicle[]>($"api/Search/{searchVehicle}");
+		//api gatway is Screwing up with me so i approached this way 
+		// litte bit hack but not good way to approach
+		var tempPatch = $"https://localhost:7237/api/Search?Id={search.Id}&LocationFrom={search.LocationFrom}&LocationTo={search.LocationTo}";
+		availableVehicles = await http.GetFromJsonAsync<AvailableVehicle[]>(tempPatch);
+	}
+	public async  void ReserveVehicle(Order order)
+	{
+		//var tempPatch = "https://localhost:7237/api/Orders?Id={order.Id}&CustomerId={order.CustomerId}&SearchVehicleId={order.SearchVehicleId}&CustomerData.Id={order.CustomerData.Id}&CustomerData.FirstName={order.CustomerData.FirstName}&CustomerData.LastName={order.CustomerData.LastName}&CustomerData.PhoneNumber={order.CustomerData.PhoneNumber}&CustomerData.CountryCode={order.CustomerData.CountryCode}&SearchVehicles.Id={order.SearchVehicles.Id}&SearchVehicles.LocationFrom={order.SearchVehicles.LocationFrom}&SearchVehicles.LocationTo={order.SearchVehicles.LocationTo}&IsCancelled={order.IsCancelled}&AvailableVehicles.Id={order.AvailableVehicles.Id}&AvailableVehicles.VechileTypes={order.AvailableVehicles.VechileTypes}&AvailableVehicles.ReachTime={order.AvailableVehicles.ReachTime}&AvailableVehicles.VehicleNumber={order.AvailableVehicles.VehicleNumber}&AvailableVehicles.TotalDistance={order.AvailableVehicles.TotalDistance}&AvailableVehicles.CostPerKm={order.AvailableVehicles.CostPerKm}&AvailableVehicles.TotalCost={order.AvailableVehicles.TotalCost}";
+		//var result = await http.GetFromJsonAsync<Order>(tempPatch);
+		//var result = await http.PostAsJsonAsync(tempPatch);
+	}
+} 

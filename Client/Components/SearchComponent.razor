@@ -1,0 +1,29 @@
+﻿@inject CurrentContextData context
+<div class="card">
+
+	<div class="card-body">
+
+		<label for="pickUpPoint">Pickup Point</label>
+		<div class="input-group input-group-lg m-2">
+			<input id="pickUpPoint" type="text" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm" placeholder="Search Location" @bind-value="@LocationFrom" />
+		</div>
+		<label for="destinationPoint">Destination Point </label>
+		<div class="input-group input-group-lg m-2">
+			<input id="destinationPoint" type="text" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm" placeholder="Search Location" @bind-value="@LocationTo" />
+		</div>
+
+		<label For="DatePicker">Date</label>
+		<div class="input-group input-group-lg m-2">
+			<InputDate id="DatePicker" @bind-Value="@OnWhichDate" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm" />
+		</div>
+
+
+		<div class="input-group input-group-lg m-2">
+			<button class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm" @onclick="OnHandleSubmit">
+				Submit
+			</button>
+		</div>
+	</div>
+
+</div>
+ 
