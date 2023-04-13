@@ -16,7 +16,7 @@ namespace NammaYatri.Server.Controllers
             this.repository = repository;
         }
         [HttpGet("{id}")]
-        public ActionResult<Order> GetOrder([FromQuery] string id)
+        public ActionResult<Order> GetOrder(string id)
         {
             var order = repository.GetOrder(id);
 
@@ -28,7 +28,7 @@ namespace NammaYatri.Server.Controllers
             return Ok(order);
         }
         [HttpGet("AllOrders/{id}")]
-        public ActionResult<Order> GetAllOrder([FromQuery] string id)
+        public ActionResult<Order> GetAllOrder(string id)
         {
             var order = repository.GetAllOrders(id);
 
@@ -41,7 +41,7 @@ namespace NammaYatri.Server.Controllers
         }
         // POST api/<OrdersController>
         [HttpPost]
-        public ActionResult<Order> Post([FromQuery] Order order)
+        public ActionResult<Order> Post(Order order)
         {
             var orderReturn = repository.AddOrder(order);
             return CreatedAtAction(nameof(GetOrder), new { id = orderReturn.Id }, orderReturn);

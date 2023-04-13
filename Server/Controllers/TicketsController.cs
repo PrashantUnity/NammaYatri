@@ -17,7 +17,7 @@ namespace NammaYatri.Server.Controllers
         }
         // GET api/<TicketsController>/5
         [HttpGet("{id}")]
-        public ActionResult<IEnumerable<Order>> Get([FromQuery] string id)
+        public ActionResult<IEnumerable<Order>> Get( string id)
         {
             var ls = repository.GetAllOrders(id);
             return Ok(ls);

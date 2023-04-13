@@ -15,12 +15,18 @@ namespace NammaYatri.Server.Controllers
         {
             this.repository = repository;
         }
-
-        // GET api/Search/
-        [HttpGet]
-        public ActionResult<IEnumerable<AvailableVehicle>> Get([FromQuery] SearchVehicle searchVehicle)
+		[HttpGet]
+		public ActionResult<IEnumerable<AvailableVehicle>> Get()
+		{
+            if(repository.LastSearch==null) return Ok(new List<AvailableVehicle>());
+			return Ok(repository.GetAvailableVehicle());
+		}
+		// GET api/Search/
+		[HttpPost]
+        public IActionResult Get(SearchVehicle searchVehicle)
         {
-            return Ok(repository.GetAvailableVehicle(searchVehicle));
+            repository.LastSearch = searchVehicle;
+            return Ok();
         }
     }
 }
