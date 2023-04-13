@@ -1,5 +1,6 @@
 ﻿using NammaYatri.Shared; 
 using System.Text;
+using System.Text.Json;
 
 namespace NammaYatri.Client.Service
 {
@@ -36,6 +37,10 @@ namespace NammaYatri.Client.Service
 				res.Append(valid[rnd.Next(valid.Length)]);
 			}
 			return res.ToString();
+		}
+		public void DebugPurpose<T>(T data)
+		{
+			Console.WriteLine(JsonSerializer.Serialize(data));
 		}
 	}
 }

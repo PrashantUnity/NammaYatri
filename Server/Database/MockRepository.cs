@@ -59,8 +59,8 @@ namespace NammaYatri.Server.Database
                 res.Append(valid[rnd.Next(valid.Length)]);
             }
             return res.ToString();
-        }
-        private IEnumerable<AvailableVehicle> MockGetAvailableVehicle(SearchVehicle searchVehicle)
+        } 
+		private IEnumerable<AvailableVehicle> MockGetAvailableVehicle(SearchVehicle searchVehicle)
         {
             var count = random.Next(6, 16);
             var mindistance = random.Next(3, 10);
@@ -69,9 +69,8 @@ namespace NammaYatri.Server.Database
             for (int i = 0; i < count; i++)
             {
                 var costPerkm = 1 + random.Next(0, 5);
-                var distance = mindistance + random.Next(0, 20);
-                var endTime = startTime.AddHours(random.Next(0, 6));
-
+                var distance = mindistance + random.Next(0, 20); 
+				var endTime = startTime.AddMinutes(random.Next(241)); 
                 var vehicle = new AvailableVehicle();
                 vehicle.Id = GenerateNumber(10);
                 vehicle.VechileTypes = RandomVechileType();
@@ -81,9 +80,17 @@ namespace NammaYatri.Server.Database
                 vehicle.TotalDistance = distance;
                 vehicle.CostPerKm = costPerkm;
                 vehicle.TotalCost = distance * costPerkm;
+                try
+                {
+                    DateTime.Parse(startTime.ToString());
+                    DateTime.Parse(endTime.ToString());
+                    lsOfAvailableVehicle.Add(vehicle);
+                }
+                catch (Exception)
+                {
+                     
+                }
 
-
-                lsOfAvailableVehicle.Add(vehicle);
             }
             return lsOfAvailableVehicle;
         }
