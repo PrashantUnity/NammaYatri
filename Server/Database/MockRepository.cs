@@ -74,8 +74,8 @@ namespace NammaYatri.Server.Database
                 var vehicle = new AvailableVehicle();
                 vehicle.Id = GenerateNumber(10);
                 vehicle.VechileTypes = RandomVechileType();
-                vehicle.StartTime = startTime.ToString();
-                vehicle.ReachTime = endTime.ToString();
+                vehicle.StartTime = startTime.ToString("HH:mm");
+                vehicle.ReachTime = endTime.ToString("HH:mm");
                 vehicle.VehicleNumber = GenerateNumber(numLength);
                 vehicle.TotalDistance = distance;
                 vehicle.CostPerKm = costPerkm;
