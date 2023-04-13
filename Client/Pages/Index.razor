@@ -1,10 +1,7 @@
 ﻿@page "/"
 @inject CurrentContextData context
 @inject HttpClient http
-@using System.Text.Json
-@using System.Text.Json.Serialization
-@using System.Text;
-@using System.Net.Mime;
+
 <PageTitle>Index</PageTitle>
 <SearchComponent ParentCaller="FetchAvailableVehicle"></SearchComponent>
 @if (availableVehicles != null)
@@ -26,9 +23,7 @@
 	public async void FetchAvailableVehicle(SearchVehicle searchVehicle)
 	{
 		search = searchVehicle;
-		//availableVehicles = await context.GetAvailableVehiclesAsync(searchVehicle) ;
-		//availableVehicles = await http.GetFromJsonAsync<AvailableVehicle[]>($"api/Search/{searchVehicle}");
-		//api gatway is Screwing up with me so i approached this way 
+		//api getway is Screwing up with me so i approached this way 
 		// litte bit hack but not good way to approach
 		var tempPatch = $"https://localhost:7237/api/Search";
 		var result = await http.PostAsJsonAsync(tempPatch,searchVehicle);
@@ -39,6 +34,8 @@
 		var tempPatch = "https://localhost:7237/api/Orders";
 		var result = await http.PostAsJsonAsync(tempPatch,order);
 	}
+
+	//reduntant or Experimental
 	IEnumerable<AvailableVehicle> GetHelper(SearchVehicle searchVehicle)
 	{
 		var json = JsonSerializer.Serialize(searchVehicle);

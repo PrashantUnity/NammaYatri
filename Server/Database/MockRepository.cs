@@ -39,18 +39,7 @@ namespace NammaYatri.Server.Database
             return orders.Select(x => x).FirstOrDefault(x => x.CustomerData.PhoneNumber == id);
         }
         Random random = new Random();
-        SearchVehicle LastSearchVehicle;
-		SearchVehicle IRepository.LastSearch 
-        { get 
-            { 
-                return LastSearchVehicle; 
-            }
-            set
-            {
-                LastSearchVehicle = value;
-            }
-        }
-
+        
 		public VechileType RandomVechileType()
         {
             var n = random.Next(0, 5);
@@ -98,8 +87,21 @@ namespace NammaYatri.Server.Database
             }
             return lsOfAvailableVehicle;
         }
-        #endregion
-        public Order? GetOrder(string id)
+		#endregion
+		SearchVehicle LastSearchVehicle;
+		SearchVehicle IRepository.LastSearch
+		{
+			get
+			{
+				return LastSearchVehicle;
+			}
+			set
+			{
+				LastSearchVehicle = value;
+			}
+		}
+
+		public Order? GetOrder(string id)
         {
             return Mockorder(id);
         }
