@@ -23,7 +23,7 @@ namespace NammaYatri.Server.Controllers
 		}
 		// GET api/Search/
 		[HttpPost]
-		public IActionResult Get(SearchVehicle searchVehicle)
+		public IActionResult Post(SearchVehicle searchVehicle)
 		{
 			repository.LastSearch = searchVehicle;
 			return Ok();

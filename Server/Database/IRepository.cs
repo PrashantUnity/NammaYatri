@@ -6,6 +6,7 @@ namespace NammaYatri.Server.Database
     public interface IRepository
     {
         void AddCustomer(Customer customer);
+        Customer GetCurrentCustomer();
 		SearchVehicle LastSearch { get; set; }
         IEnumerable<AvailableVehicle> GetAvailableVehicle();
         Order AddOrder(Order order);

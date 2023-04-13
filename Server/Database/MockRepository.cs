@@ -138,6 +138,10 @@ namespace NammaYatri.Server.Database
         {
             return MockUpdate(order);
         }
-         
+
+		public Customer GetCurrentCustomer()
+		{
+			return customers[^1];
+		}
 	}
 }
