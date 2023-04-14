@@ -1,0 +1,126 @@
+﻿<style>
+    body {
+        background-color: antiquewhite;
+        font-family: 'Montserrat', sans-serif;
+    }
+    /* Ticket styles */
+    .ticket {
+        border-radius: 20px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        margin: 10px;
+        max-width: 430px;
+        overflow: hidden;
+    }
+
+    .ticket-header {
+        background-color: #FF5A5F;
+        color: #FFFFFF;
+        display: flex;
+        justify-content: space-between;
+        padding: 20px;
+    }
+
+        .ticket-header h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        .ticket-header p {
+            font-size: 18px;
+            font-weight: 400;
+            margin: 0;
+        }
+
+    .ticket-body {
+        background-color: #FFFFFF;
+        padding: 40px;
+    }
+
+    .ticket-info {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+
+        .ticket-info p {
+            font-size: 20px;
+            font-weight: 400;
+            margin: 0;
+        }
+
+    .barcode {
+        display: flex;
+        justify-content: center;
+        margin-top: 5px;
+    }
+
+        .barcode img {
+            height: 120px;
+        }
+
+</style>
+@if (OrderTicket!=null){
+    <div class="Col">
+<div class="ticket">
+    <div class="ticket-header">
+        <h2>@vechiletype</h2>
+        <p>Date: @GetDepartureTime(OrderTicket)</p>
+    </div>
+    <div class="ticket-body">
+        <div class="ticket-info">
+            <p>From: @from</p>
+        </div>
+        <div class="ticket-info">
+            <p>To: @to</p>
+        </div>
+        <div class="ticket-info">
+            <p>Distance: @distance km</p>
+
+        </div>
+        <div class="ticket-info">
+            <p>Price: $@price</p>
+        </div>
+        <div class="ticket-info">
+            <p>Name: @name</p>
+        </div>
+        <div class="barcode">
+            <img alt='Barcode Generator TEC-IT'
+                 src='https://barcode.tec-it.com/barcode.ashx?data=@ticketId&code=MobileQRCode&translate-esc=true&dataattributekey_2=&dataattributeval_2=&dataattributekey_3=&dataattributeval_3=&dataattributekey_4=&dataattributeval_4=&dataattributekey_5=&dataattributeval_5=&digitallink=&eclevel=L&dmsize=Default' />
+        </div>
+    </div>
+</div>
+</div>
+}
+
+@code {
+    [Parameter, EditorRequired]
+    public Order OrderTicket { get; set; }
+
+    private string name = "";
+    private string from = "";
+    private string to = "";
+    private double distance = 0;
+    private double price = 0;
+    public string ticketId = "";
+    private VechileType vechiletype = VechileType.X;
+    protected override void OnInitialized()
+    {
+        vechiletype = OrderTicket.AvailableVehicles.VechileTypes;
+        name = OrderTicket.CustomerData.FirstName + " " + OrderTicket.CustomerData.LastName;
+        from = OrderTicket.SearchVehicles.LocationFrom;
+        to = OrderTicket.SearchVehicles.LocationTo;
+        distance = OrderTicket.AvailableVehicles.TotalDistance;
+        price = Math.Round(OrderTicket.AvailableVehicles.TotalCost, 2);
+        ticketId = $"OrderId    :{OrderTicket.Id}"+
+                   $"Name       : {OrderTicket.CustomerData.FirstName}"+
+                   $"LastName   :{OrderTicket.CustomerData.LastName}"+
+                   $"{OrderTicket.CustomerData.PhoneNumber}";
+    }
+    public string GetDepartureTime(Order order)
+    {
+        return order.AvailableVehicles.StartTime; 
+    }
+
+}

@@ -3,11 +3,14 @@
 @inject CurrentContextData context
 <h3>Orders</h3>
 @if (orders != null)
-{
-	foreach (var item in orders)
-	{
-		<h3>@item.CustomerData.FirstName</h3>
-	}
+{ 
+		<div class="card-group">
+			
+			@foreach (var item in orders)
+			{
+				<OrderComponent OrderTicket="@item"></OrderComponent>
+			} 
+		</div> 
 }
 
 @code {
