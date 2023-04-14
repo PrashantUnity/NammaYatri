@@ -28,7 +28,7 @@ namespace NammaYatri.Server.Controllers
             return Ok(order);
         }
         [HttpGet("AllOrders/{id}")]
-        public ActionResult<Order> GetAllOrder(string id)
+        public ActionResult<IEnumerable<Order>> GetAllOrder(string id)
         {
             var order = repository.GetAllOrders(id);
 

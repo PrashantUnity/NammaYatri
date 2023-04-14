@@ -13,11 +13,10 @@ namespace NammaYatri.Client.Pages
 
 		public async void FetchAvailableVehicle(SearchVehicle searchVehicle)
 		{
-			search = searchVehicle;
-			//api getway is Screwing up with me so i approached this way 
-			// litte bit hack but not good way to approach
+			search = searchVehicle; 
 			var tempPatch = $"https://localhost:7237/api/Search";
-			var result = await http.PostAsJsonAsync(tempPatch, searchVehicle);
+
+			await http.PostAsJsonAsync(tempPatch, searchVehicle);
 			availableVehicles = await http.GetFromJsonAsync<AvailableVehicle[]>(tempPatch);
 			StateHasChanged();
 

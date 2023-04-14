@@ -28,12 +28,13 @@ namespace NammaYatri.Client.Components
 		{
 			var order = new Order()
 			{
-
-				AvailableVehicles = availableVehicle,
-				CustomerData = context.Customers,
 				Id = context.GenerateNumber(10),
+				CustomerId = context.Customers.Id,
+				SearchVehicleId = availableVehicle.Id,
+				CustomerData = context.Customers,
 				SearchVehicles = searchVechile,
-				IsCancelled = false
+				IsCancelled = false,
+				AvailableVehicles = availableVehicle
 			};
 			await OrderedVehicle.InvokeAsync(order);
 			SendMessage();

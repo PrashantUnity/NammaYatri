@@ -14,7 +14,7 @@
 	IEnumerable<Order>? orders;
 	protected override async Task OnInitializedAsync()
 	{
-		orders = await http.GetFromJsonAsync<Order[]>($"api/orders/{context.Customers.PhoneNumber}");
+		orders = await http.GetFromJsonAsync<Order[]>($"api/orders/AllOrders/{context.Customers.PhoneNumber}");
 
 	}
 }

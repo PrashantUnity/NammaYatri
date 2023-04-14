@@ -12,14 +12,13 @@ namespace NammaYatri.Client.Components
         public EventCallback<SearchVehicle> ParentCaller { get; set; }
 
         private async void OnHandleSubmit()
-        {
-            var forinspection = 0;
+        { 
             var data = new SearchVehicle()
             {
                 Id = context.GenerateNumber(10),
+                OnWhichDate = OnWhichDate,
                 LocationFrom = LocationFrom,
-                LocationTo = LocationTo,
-                OnWhichDate = OnWhichDate
+                LocationTo = LocationTo
             };
             await ParentCaller.InvokeAsync(data);
         }
