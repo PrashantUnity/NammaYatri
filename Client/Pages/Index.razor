@@ -1,18 +1,23 @@
 ﻿@page "/"
 @inject CurrentContextData context
 @inject HttpClient http
-
-<PageTitle>Index</PageTitle>
-<SearchComponent ParentCaller="FetchAvailableVehicle"></SearchComponent>
-@if (availableVehicles != null)
+@if (context.ShowProfile)
 {
-	<div class="container">
-		<div class="row">
-			@foreach (var i in availableVehicles)
-			{
-				<VehicleComponent availableVehicle="@i" searchVechile="@search" OrderedVehicle="ReserveVehicle" />
-			}
-		</div>
-	</div>  						
+	<CustomersComponent Clicked="SaveCustomers"/>
 }
- 
+else
+{
+	<PageTitle>Index</PageTitle>
+	<SearchComponent ParentCaller="FetchAvailableVehicle"></SearchComponent>
+	@if (availableVehicles != null)
+	{
+		<div class="container">
+			<div class="row">
+				@foreach (var i in availableVehicles)
+				{
+					<VehicleComponent availableVehicle="@i" searchVechile="@search" OrderedVehicle="ReserveVehicle" />
+				}
+			</div>
+		</div>
+	}
+}

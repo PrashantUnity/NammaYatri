@@ -1,9 +1,13 @@
-﻿using NammaYatri.Shared;
+﻿using Microsoft.AspNetCore.Components;
+using NammaYatri.Shared;
+using System.Text;
 
 namespace NammaYatri.Client.Components
 {
     public partial class CustomersComponent
     {
+        [Parameter]
+        public EventCallback<bool> Clicked { get; set; }
         public Customer customer = new Customer();
         public (string, string) country = ("India", "91");
         private List<(string, string)> countryCode = new List<(string, string)>
@@ -20,9 +24,12 @@ namespace NammaYatri.Client.Components
         {
             customer = context.Customers;
         }
-        public void HandleSubmit()
+        public async void HandleSubmit()
         {
             context.Customers = context.GetCustomer(customer);
-        }
+            context.ShowProfile = false;
+            await Clicked.InvokeAsync(true);
+
+		}
     }
 }

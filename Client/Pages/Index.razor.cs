@@ -10,7 +10,7 @@ namespace NammaYatri.Client.Pages
 	{
 		private IEnumerable<AvailableVehicle>? availableVehicles;
 		private SearchVehicle search;
-
+		
 		public async void FetchAvailableVehicle(SearchVehicle searchVehicle)
 		{
 			search = searchVehicle; 
@@ -22,14 +22,16 @@ namespace NammaYatri.Client.Pages
 
 			//context.DebugPurpose(availableVehicles);
 		}
-
-
 		public async void ReserveVehicle(Order order)
 		{
 			var tempPatch = "https://localhost:7237/api/Orders";
 			var result = await http.PostAsJsonAsync(tempPatch, order);
 		}
 
+		public async void SaveCustomers(bool click)
+		{
+			if (click) StateHasChanged();
+		}
 		//reduntant or Experimental 
 		IEnumerable<AvailableVehicle> GetHelper(SearchVehicle searchVehicle)
 		{

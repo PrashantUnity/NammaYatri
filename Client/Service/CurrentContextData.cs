@@ -5,7 +5,8 @@ using System.Text.Json;
 namespace NammaYatri.Client.Service
 {
 	public class CurrentContextData
-	{ 
+	{
+		public bool ShowProfile = true;
 		public Customer Customers { get; set; } =
 			new Customer()
 			{

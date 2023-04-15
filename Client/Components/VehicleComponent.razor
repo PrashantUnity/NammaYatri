@@ -7,7 +7,7 @@
 		<h3 class="card-header text-start">
 			Car Type : @availableVehicle.VechileTypes
 		</h3>
-		<div class="card-body">
+		<div class="card-body  @backColor">
 			<div class="card-title d-flex justify-content-between">
 				<h3>@availableVehicle.StartTime</h3>
 				<h3>@availableVehicle.ReachTime</h3>
@@ -20,7 +20,7 @@
 				<h5>@searchVechile.LocationFrom</h5>
 				<h5>@searchVechile.LocationTo</h5>
 			</div>
-			<a class="btn btn-primary" @onclick="BookTicket">Reserve</a>
+			<a class="btn @btnColor @disabling" @onclick="BookTicket">Reserve</a>
 		</div>
 	</div>
 </div>

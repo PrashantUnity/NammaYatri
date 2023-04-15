@@ -13,8 +13,11 @@ namespace NammaYatri.Client.Components
 		public SearchVehicle searchVechile { get; set; }
 
 		[Parameter, EditorRequired]
-		public EventCallback<Order> OrderedVehicle { get; set; } 
+		public EventCallback<Order> OrderedVehicle { get; set; }
 
+		string? disabling =null;
+		string btnColor = "btn-primary";
+		string backColor = null;
 		#endregion
 
 
@@ -26,6 +29,9 @@ namespace NammaYatri.Client.Components
 		}
 		private async void BookTicket()
 		{
+			disabling = "disabled";
+			btnColor = "btn-light";
+			backColor = "bg-success";
 			var order = new Order()
 			{
 				Id = context.GenerateNumber(10),
